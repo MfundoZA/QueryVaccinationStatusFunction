@@ -14,7 +14,13 @@ namespace QueryVaccinationStatusFunction
     public static class QueryVaccinationStatus
     {
         // Hardcoded database that holds registered users
-        static List<User> users = new List<User> { new User("9607175800088", false), new User("8304064800087", true), new User("0202185708080", true), new User("9903024800084", false) };
+        static List<User> users = new List<User> 
+        { 
+            new User("9607175800088", false),
+            new User("8304064800087", true),
+            new User("0202185708080", true),
+            new User("9903024800084", false)
+        };
 
         [FunctionName("QueryVaccinationStatus")]
         public static async Task<IActionResult> Run(
@@ -30,7 +36,8 @@ namespace QueryVaccinationStatusFunction
             id = id ?? data?.id;
 
             string responseMessage = string.IsNullOrEmpty(id)
-                ? "This HTTP triggered function executed successfully. Pass an ID in the query string (?id=XXXXXXXXXXXXX) or in the request body to recieve your vaccination status."
+                ? "This HTTP triggered function executed successfully. Pass an ID in the query string (?id=XXXXXXXXXXXXX)" +
+                " or in the request body to recieve your vaccination status."
                 : checkVaccinationStatus(id);
 
             return new OkObjectResult(responseMessage);
